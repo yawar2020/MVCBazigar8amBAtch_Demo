@@ -16,8 +16,8 @@ namespace MVCBazigar8amBatchDemo1.Controllers
         public ActionResult GetData()
         {
             List<EmployeeModel> objlist = new List<EmployeeModel>();
-            EmployeeModel obj = new Models.EmployeeModel();
-            obj.Empid = 1;
+            EmployeeModel obj = new Models.EmployeeModel(); 
+            obj.Empid = 12;
             obj.Empname = "Kaushik";
             obj.EmpSalary = 25000;
 
