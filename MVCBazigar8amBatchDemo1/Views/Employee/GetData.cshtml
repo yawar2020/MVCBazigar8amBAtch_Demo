@@ -1,0 +1,22 @@
+﻿@model MVCBazigar8amBatchDemo1.Models.EmpDept
+@{
+    ViewBag.Title = "GetData";
+
+}
+
+<h2>GetData</h2>
+
+@*@emp.Empid<br />
+@emp.Empname<br />
+@emp.EmpSalary*@
+@foreach (var item in Model.Employee)
+{
+    @item.Empid<br />
+    @item.Empname<br />
+    @item.EmpSalary<br /><br /><br />
+
+}
+
+
+@Model.Department.Deptid
+@Model.Department.DeptName
