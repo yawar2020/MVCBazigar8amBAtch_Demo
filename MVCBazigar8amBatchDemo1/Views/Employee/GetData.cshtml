@@ -6,16 +6,7 @@
 
 <h2>GetData</h2>
 
-@*@emp.Empid<br />
-@emp.Empname<br />
-@emp.EmpSalary*@
-@foreach (var item in Model.Employee)
-{
-    @item.Empid<br />
-    @item.Empname<br />
-    @item.EmpSalary<br /><br /><br />
-
-}
+@Html.Partial("MyPartialView",Model)
 
 
 @Model.Department.Deptid

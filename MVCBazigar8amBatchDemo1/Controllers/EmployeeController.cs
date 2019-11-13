@@ -9,11 +9,12 @@ namespace MVCBazigar8amBatchDemo1.Controllers
     public class EmployeeController : Controller
     {
         // GET: Employee
-        public string Index(int? id)
+        public ViewResult Index(int? id)
         {
-            return "My Employee Id "+ id+"-"+Request.QueryString["ename"]+"-"+Request.QueryString["dept"];
+            //    return "My Employee Id "+ id+"-"+Request.QueryString["ename"]+"-"+Request.QueryString["dept"];
+            return View();
         }
-        public ActionResult GetData()
+        public ViewResult GetData()
         {
             List<EmployeeModel> objlist = new List<EmployeeModel>();
             EmployeeModel obj = new Models.EmployeeModel(); 
@@ -42,6 +43,11 @@ namespace MVCBazigar8amBatchDemo1.Controllers
 
 
             return View(objdb);
+        }
+        public PartialViewResult mypartial()
+        {
+
+            return PartialView("MyPartialView");
         }
     }
 }
