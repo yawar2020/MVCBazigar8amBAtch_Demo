@@ -16,7 +16,7 @@ namespace MVCBazigar8amBatchDemo1
             routes.MapRoute(
                 name: "Default1",
                 url: "Bakery/Pizza",
-                defaults: new { controller = "Employee", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Default", action = "Index", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(

@@ -49,6 +49,38 @@ namespace MVCBazigar8amBatchDemo1.Controllers
 
             return PartialView("MyPartialView");
         }
+        public RedirectResult GotoUrl() {
+            return Redirect("http://www.google.com");
+        }
+        public RedirectResult GotoUrl1()
+        {
+            return Redirect("~/Employee/GetData");
+        }
+        public JsonResult GetJsonData()
+        {
+            List<EmployeeModel> objlist = new List<EmployeeModel>();
+            EmployeeModel obj = new Models.EmployeeModel();
+            obj.Empid = 12;
+            obj.Empname = "Kaushik";
+            obj.EmpSalary = 25000;
+
+            EmployeeModel obj1 = new Models.EmployeeModel();
+            obj1.Empid = 1;
+            obj1.Empname = "Mounika";
+            obj1.EmpSalary = 256000;
+            objlist.Add(obj);
+            objlist.Add(obj1);
+
+            return Json(objlist, JsonRequestBehavior.AllowGet);
+        }
+
+        public RedirectToRouteResult getToPage()
+        {
+            //  return RedirectToAction("index","Default");
+            return RedirectToRoute("Default1");
+        }
+
+       
     }
 }
 
