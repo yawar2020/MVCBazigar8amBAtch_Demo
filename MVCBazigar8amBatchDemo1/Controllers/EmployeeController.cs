@@ -9,6 +9,8 @@ namespace MVCBazigar8amBatchDemo1.Controllers
     public class EmployeeController : Controller
     {
         // GET: Employee
+
+        GaneshEntities db = new GaneshEntities();
         public ViewResult Index(int? id)
         {
             //    return "My Employee Id "+ id+"-"+Request.QueryString["ename"]+"-"+Request.QueryString["dept"];
@@ -80,7 +82,11 @@ namespace MVCBazigar8amBatchDemo1.Controllers
             return RedirectToRoute("Default1");
         }
 
-       
+        public ActionResult HtmlHelperExample()
+        {
+            ViewBag.Country = new SelectList(db.Countries, "Id", "CountryName");
+            return View();
+        }
     }
 }
 

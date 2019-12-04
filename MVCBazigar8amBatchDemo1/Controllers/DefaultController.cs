@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVCBazigar8amBatchDemo1.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,7 @@ namespace MVCBazigar8amBatchDemo1.Controllers
     public class DefaultController : Controller
     {
         // GET: Default
+        GaneshEntities db = new GaneshEntities();
         public ActionResult Index()
         {
             ViewBag.watch = "fast track watch";
@@ -34,6 +36,17 @@ namespace MVCBazigar8amBatchDemo1.Controllers
                 ContentData = "No Format Availble";
             }
             return Content(ContentData);
+        }
+        public ActionResult LoveMusic()
+        {
+
+            return View();
+        }
+
+        public ActionResult LoveHuman()
+        {
+
+            return View();
         }
     }
 }

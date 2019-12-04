@@ -1,0 +1,48 @@
+﻿@using MVCBazigar8amBatchDemo1.CustomFilter;
+@model MVCBazigar8amBatchDemo1.Models.EmployeeModel
+@{
+    ViewBag.Title = "HtmlHelperExample";
+    Layout = null;
+}
+
+<style>
+    .testbk{
+        background-color:black;
+    }
+</style>
+<script>
+    function fun() {
+        alert('hello world');
+    }
+</script>
+
+<h2>HtmlHelperExample</h2>
+
+@Html.TextBox("Empstroyname",null,new {@style="color:red;font-size:18px;",@class="testbk", @onclick = "fun()" })
+<br />
+<input type="text" onclick="fun()" />
+<br />
+<span>Male</span> @Html.RadioButton("Gender","Male",true)
+<span>FeMale</span> @Html.RadioButton("Gender", "FeMale")
+<br />
+@Html.Password("Pwd","12345")<br />
+@Html.CheckBox("chkJava")<span>Java</span>
+@Html.CheckBox("chkMVC",true)<span>MVC</span><br />
+@Html.DropDownList("Country", new List<SelectListItem>()
+{
+new SelectListItem {Text="India",Value="1" },
+new SelectListItem {Text="Bangladesh",Value="2" ,Selected=true},
+new SelectListItem {Text="China",Value="3" },
+},"Select Country")
+
+<br />
+@Html.DropDownList("Country")
+
+@myhtmlhelper.MyLabel("Employee Name")<br />
+@Html.createUrControl("file")<br />
+
+ @helper labelbyrazzorcode(string content)
+{  
+    <label>@content</label>
+}
+@labelbyrazzorcode("hi this is ali")
