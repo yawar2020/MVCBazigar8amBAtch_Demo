@@ -12,6 +12,8 @@ namespace DatabasedFirstApproach.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class GaneshEntities : DbContext
     {
@@ -26,5 +28,11 @@ namespace DatabasedFirstApproach.Models
         }
     
         public virtual DbSet<EmployeeModel> EmployeeModels { get; set; }
+        public virtual DbSet<DepartmentModel> DepartmentModels { get; set; }
+    
+        public virtual ObjectResult<sp_GetEmployee_Result> sp_GetEmployee()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetEmployee_Result>("sp_GetEmployee");
+        }
     }
 }

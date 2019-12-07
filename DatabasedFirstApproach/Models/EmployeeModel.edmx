@@ -4,7 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GaneshModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GaneshModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DepartmentModels">
+          <Key>
+            <PropertyRef Name="DeptId" />
+          </Key>
+          <Property Name="DeptId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeptName" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="EmployeeModels">
           <Key>
             <PropertyRef Name="Empid" />
@@ -12,13 +19,15 @@
           <Property Name="Empid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EmpName" Type="nvarchar(max)" />
           <Property Name="EmpSalary" Type="int" Nullable="false" />
+          <Property Name="EmailId" Type="nvarchar" MaxLength="50" />
           <Property Name="DeptId" Type="int" Nullable="false" />
         </EntityType>
+        <Function Name="sp_GetEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="GaneshModelStoreContainer">
+          <EntitySet Name="DepartmentModels" EntityType="Self.DepartmentModels" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeeModels" EntityType="Self.EmployeeModels" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GaneshModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -30,10 +39,27 @@
           <Property Name="EmpName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="EmpSalary" Type="Int32" Nullable="false" />
           <Property Name="DeptId" Type="Int32" Nullable="false" />
+          <Property Name="EmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="GaneshEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="EmployeeModels" EntityType="Self.EmployeeModel" />
+          <EntitySet Name="DepartmentModels" EntityType="GaneshModel.DepartmentModel" />
+          <FunctionImport Name="sp_GetEmployee" ReturnType="Collection(GaneshModel.sp_GetEmployee_Result)" />
         </EntityContainer>
+        <EntityType Name="DepartmentModel">
+          <Key>
+            <PropertyRef Name="DeptId" />
+          </Key>
+          <Property Name="DeptId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeptName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="sp_GetEmployee_Result">
+          <Property Type="Int32" Name="Empid" Nullable="false" />
+          <Property Type="String" Name="EmpName" Nullable="true" />
+          <Property Type="Int32" Name="EmpSalary" Nullable="false" />
+          <Property Type="String" Name="EmailId" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="DeptId" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -43,6 +69,7 @@
           <EntitySetMapping Name="EmployeeModels">
             <EntityTypeMapping TypeName="GaneshModel.EmployeeModel">
               <MappingFragment StoreEntitySet="EmployeeModels">
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
                 <ScalarProperty Name="Empid" ColumnName="Empid" />
                 <ScalarProperty Name="EmpName" ColumnName="EmpName" />
                 <ScalarProperty Name="EmpSalary" ColumnName="EmpSalary" />
@@ -50,6 +77,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DepartmentModels">
+            <EntityTypeMapping TypeName="GaneshModel.DepartmentModel">
+              <MappingFragment StoreEntitySet="DepartmentModels">
+                <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+                <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetEmployee" FunctionName="GaneshModel.Store.sp_GetEmployee">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GaneshModel.sp_GetEmployee_Result">
+                <ScalarProperty Name="Empid" ColumnName="Empid" />
+                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+                <ScalarProperty Name="EmpSalary" ColumnName="EmpSalary" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

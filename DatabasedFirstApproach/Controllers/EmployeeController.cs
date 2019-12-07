@@ -17,7 +17,20 @@ namespace DatabasedFirstApproach.Controllers
         // GET: Employee
         public ActionResult Index()
         {
-            return View(db.EmployeeModels.ToList());
+            var EmpDept = (from e in db.EmployeeModels
+                           join d in db.DepartmentModels
+                           on e.DeptId equals d.DeptId
+                           select new EmployeeDept
+                           {
+                               Empid=e.Empid,
+                               EmpName=e.EmpName,
+                               EmpSalary=e.EmpSalary,
+                               EmailId=e.EmailId,
+                               DeptId=d.DeptId,
+                               DeptName=d.DeptName
+                           }
+                         ).ToList();
+            return View(EmpDept);
         }
 
         // GET: Employee/Details/5

@@ -10,14 +10,13 @@
 namespace DatabasedFirstApproach.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class EmployeeModel
+    public partial class sp_GetEmployee_Result
     {
         public int Empid { get; set; }
         public string EmpName { get; set; }
         public int EmpSalary { get; set; }
-        public int DeptId { get; set; }
         public string EmailId { get; set; }
+        public int DeptId { get; set; }
     }
 }
