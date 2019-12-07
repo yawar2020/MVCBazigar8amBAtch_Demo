@@ -188,6 +188,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EmployeeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sp_GetDepartyment_Result.cs">
+      <DependentUpon>EmployeeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sp_GetEmployee_Result.cs">
       <DependentUpon>EmployeeModel.tt</DependentUpon>
     </Compile>
@@ -214,6 +217,8 @@
     <Content Include="Views\Employee\Edit.cshtml" />
     <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Employee\IndexStoreproc.cshtml" />
+    <Content Include="Views\Employee\CreateSp.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

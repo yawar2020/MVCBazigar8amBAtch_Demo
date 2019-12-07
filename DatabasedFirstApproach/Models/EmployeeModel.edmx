@@ -22,7 +22,13 @@
           <Property Name="EmailId" Type="nvarchar" MaxLength="50" />
           <Property Name="DeptId" Type="int" Nullable="false" />
         </EntityType>
+        <Function Name="sp_GetDepartyment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_GetEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_SaveEmployeeDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpName" Type="nvarchar" Mode="In" />
+          <Parameter Name="EmpSalary" Type="int" Mode="In" />
+          <Parameter Name="DeptId" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="GaneshModelStoreContainer">
           <EntitySet Name="DepartmentModels" EntityType="Self.DepartmentModels" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeeModels" EntityType="Self.EmployeeModels" Schema="dbo" store:Type="Tables" />
@@ -45,6 +51,12 @@
           <EntitySet Name="EmployeeModels" EntityType="Self.EmployeeModel" />
           <EntitySet Name="DepartmentModels" EntityType="GaneshModel.DepartmentModel" />
           <FunctionImport Name="sp_GetEmployee" ReturnType="Collection(GaneshModel.sp_GetEmployee_Result)" />
+          <FunctionImport Name="sp_GetDepartyment" ReturnType="Collection(GaneshModel.sp_GetDepartyment_Result)" />
+          <FunctionImport Name="sp_SaveEmployeeDetails" ReturnType="Collection(Decimal)">
+            <Parameter Name="EmpName" Mode="In" Type="String" />
+            <Parameter Name="EmpSalary" Mode="In" Type="Int32" />
+            <Parameter Name="DeptId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="DepartmentModel">
           <Key>
@@ -59,6 +71,10 @@
           <Property Type="Int32" Name="EmpSalary" Nullable="false" />
           <Property Type="String" Name="EmailId" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="DeptId" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_GetDepartyment_Result">
+          <Property Type="Int32" Name="DeptId" Nullable="false" />
+          <Property Type="String" Name="DeptName" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -96,6 +112,15 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_GetDepartyment" FunctionName="GaneshModel.Store.sp_GetDepartyment">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GaneshModel.sp_GetDepartyment_Result">
+                <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+                <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_SaveEmployeeDetails" FunctionName="GaneshModel.Store.sp_SaveEmployeeDetails" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

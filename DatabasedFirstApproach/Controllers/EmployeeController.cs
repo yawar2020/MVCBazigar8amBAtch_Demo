@@ -33,6 +33,11 @@ namespace DatabasedFirstApproach.Controllers
             return View(EmpDept);
         }
 
+        public ActionResult IndexStoreproc()
+        {
+            return View(db.sp_GetEmployee().ToList());
+        }
+
         // GET: Employee/Details/5
         public ActionResult Details(int? id)
         {
@@ -135,6 +140,18 @@ namespace DatabasedFirstApproach.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [HttpGet]
+        public ActionResult CreateSp() {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateSp(EmployeeModel emp)
+        {
+            db.sp_SaveEmployeeDetails(emp.EmpName, emp.EmpSalary, emp.DeptId);
+            return View();
         }
     }
 }

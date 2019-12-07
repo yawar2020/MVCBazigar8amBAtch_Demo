@@ -34,5 +34,27 @@ namespace DatabasedFirstApproach.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetEmployee_Result>("sp_GetEmployee");
         }
+    
+        public virtual ObjectResult<sp_GetDepartyment_Result> sp_GetDepartyment()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetDepartyment_Result>("sp_GetDepartyment");
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> sp_SaveEmployeeDetails(string empName, Nullable<int> empSalary, Nullable<int> deptId)
+        {
+            var empNameParameter = empName != null ?
+                new ObjectParameter("EmpName", empName) :
+                new ObjectParameter("EmpName", typeof(string));
+    
+            var empSalaryParameter = empSalary.HasValue ?
+                new ObjectParameter("EmpSalary", empSalary) :
+                new ObjectParameter("EmpSalary", typeof(int));
+    
+            var deptIdParameter = deptId.HasValue ?
+                new ObjectParameter("DeptId", deptId) :
+                new ObjectParameter("DeptId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("sp_SaveEmployeeDetails", empNameParameter, empSalaryParameter, deptIdParameter);
+        }
     }
 }
