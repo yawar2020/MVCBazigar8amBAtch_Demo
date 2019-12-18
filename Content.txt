@@ -1,0 +1,9 @@
+
+What is Controller?
+What is Model and View?
+ActionResult?
+Crud operation ado.net
+Enitity frmaework Database,Model based and code first approach
+Html Helpers
+Layout and Section
+Routing

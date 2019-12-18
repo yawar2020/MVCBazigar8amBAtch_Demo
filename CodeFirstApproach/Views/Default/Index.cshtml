@@ -1,0 +1,34 @@
+﻿@model List<CodeFirstApproach.Models.EmployeeModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@Html.ActionLink("Create","Create")
+
+<table class="table-bordered">
+    <tr>
+        <th>
+            EmpId
+        </th>
+        <th>EmpName</th>
+       <th>Salary</th>
+        <th>Action</th>
+    </tr>
+    
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.EmpId</td>
+            <td>@item.EmpName</td>
+            <td>@item.EmpSalary</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = @item.EmpId })
+            @Html.ActionLink("Delete", "Delete", new { id = @item.EmpId })
+            </td>
+            
+            
+        </tr>
+    }
+</table>

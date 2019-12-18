@@ -40,7 +40,7 @@ namespace DatabasedFirstApproach.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_GetDepartyment_Result>("sp_GetDepartyment");
         }
     
-        public virtual ObjectResult<Nullable<decimal>> sp_SaveEmployeeDetails(string empName, Nullable<int> empSalary, Nullable<int> deptId)
+        public virtual ObjectResult<int> sp_SaveEmployeeDetails(string empName, Nullable<int> empSalary, Nullable<int> deptId)
         {
             var empNameParameter = empName != null ?
                 new ObjectParameter("EmpName", empName) :
@@ -54,7 +54,7 @@ namespace DatabasedFirstApproach.Models
                 new ObjectParameter("DeptId", deptId) :
                 new ObjectParameter("DeptId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("sp_SaveEmployeeDetails", empNameParameter, empSalaryParameter, deptIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<int>("sp_SaveEmployeeDetails", empNameParameter, empSalaryParameter, deptIdParameter);
         }
     }
 }
